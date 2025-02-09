@@ -120,7 +120,7 @@ const Navbar = () => {
       </div>
       <div
         ref={menuRef}
-        className={`absolute left-0 top-16 bg-[#284A93] w-56 rounded-lg shadow-lg p-6 z-50 transition-transform ${
+        className={`absolute left-0 top-16 bg-[#284A93] w-56 rounded-lg shadow-lg p-4 z-50 transition-transform ml-2 ${
           isMobileMenuOpen ? "translate-x-0" : "-translate-x-80"
         }`}
       >
@@ -138,7 +138,7 @@ const Navbar = () => {
       </div>
       <div
         ref={loginRef}
-        className={`absolute top-16 sm:right-0 bg-[#284A93] w-80 rounded-lg shadow-lg p-6 transform transition-all duration-300 ease-in-out z-50 ${
+        className={`absolute top-16 sm:mr-2 sm:right-0 bg-[#284A93] w-80 rounded-lg shadow-lg p-6 transform transition-all duration-300 ease-in-out z-50 ${
           isLoginOpen ? "opacity-100 visible" : "opacity-0 invisible"
         } ${
           isLoginOpen
