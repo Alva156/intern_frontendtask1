@@ -31,6 +31,10 @@ const router = createBrowserRouter([
         element: <Stories />,
       },
       {
+        path: "/stories/:id",
+        element: <Stories />,
+      },
+      {
         path: "/faqs",
         element: <FAQS />,
       },

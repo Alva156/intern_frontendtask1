@@ -156,14 +156,14 @@ function Companies() {
         onPageChange={({ selected }) => setCurrentPage(selected)}
         containerClassName="flex justify-center space-x-2 mt-6"
         pageClassName="px-3 py-1 border rounded-md hover:bg-gray-200"
-        activeClassName="bg-blue-500 text-white"
+        activeClassName="bg-[#284A93] text-white"
       />
 
       {selectedCompany && (
-        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
+        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 ">
           <div
             ref={modalRef}
-            className="bg-white p-6 rounded-lg shadow-lg max-w-md w-full text-center relative"
+            className="bg-white mx-5 p-6 rounded-lg shadow-lg max-w-md w-full text-center relative "
           >
             <button
               className="absolute top-2 right-2 text-gray-500 hover:text-gray-800"
@@ -181,7 +181,7 @@ function Companies() {
               ))}
             </ul>
             <button
-              className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600"
+              className="bg-[#284A93] text-white px-4 py-2 rounded-md hover:bg-blue-600"
               onClick={handleApplyClick}
             >
               Apply Now
@@ -191,7 +191,7 @@ function Companies() {
       )}
 
       {showPopup && (
-        <div className="fixed top-4 left-1/2 transform -translate-x-1/2 bg-red-600 text-white px-4 py-2 rounded-md shadow-lg">
+        <div className="fixed top-4 left-1/2 transform -translate-x-1/2 bg-red-600 text-white px-4 py-2  rounded-md shadow-lg">
           You must log in first to apply.
         </div>
       )}

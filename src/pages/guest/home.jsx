@@ -8,24 +8,27 @@ import video from "../../assets/homepagevid.mp4";
 const stories = [
   {
     id: 1,
-    title: "Internship Success Story",
+    title: "Overcoming Challenges in Tech",
     author: "John Doe",
-    date: "Feb 2025",
-    summary: "Discover how this intern secured a top internship...",
+    date: "January 15, 2024",
+    content:
+      "My journey in tech started with countless challenges, from debugging nightmares to imposter syndrome... ",
   },
   {
     id: 2,
-    title: "From Classroom to Office",
+    title: "First Internship Experience",
     author: "Jane Smith",
-    date: "Jan 2025",
-    summary: "A journey of learning and adapting in a corporate world...",
+    date: "February 10, 2024",
+    content:
+      "Starting my first internship was nerve-wracking, but it turned out to be a great learning ...",
   },
   {
     id: 3,
-    title: "Breaking Into Tech",
-    author: "Alice Johnson",
-    date: "Dec 2024",
-    summary: "Insights on how to land your first tech internship...",
+    title: "How I Built My First App",
+    author: "Alex Johnson",
+    date: "March 5, 2024",
+    content:
+      "Building my first app was an exciting journey, filled with late-night coding...",
   },
 ];
 
@@ -165,14 +168,19 @@ const Home = () => {
               {stories.map((story) => (
                 <div
                   key={story.id}
-                  className="bg-white p-6 rounded-lg shadow-md flex flex-col h-full w-full"
+                  className="bg-white p-6 rounded-lg shadow-md text-center flex flex-col h-full w-full"
                 >
                   <h3 className="font-bold text-xl mb-2">{story.title}</h3>
                   <p className="text-gray-600 text-sm mb-4">
                     By {story.author} - {story.date}
                   </p>
-                  <p className="text-gray-600 flex-grow">{story.summary}</p>
-                  <Link to="/stories"></Link>
+                  <p className="text-gray-600 flex-grow">{story.content}</p>
+                  <Link
+                    to={`/stories/${story.id}`}
+                    className="mt-4 bg-[#284A93] text-white px-4 py-2 rounded"
+                  >
+                    Read More
+                  </Link>
                 </div>
               ))}
             </div>
