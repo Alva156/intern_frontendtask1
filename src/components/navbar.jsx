@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import { FaBars, FaTimes } from "react-icons/fa";
 import { MdLogin } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
-import LoginForm from "./loginForm.jsx";
+import LoginForm from "../pages/authentication/loginForm";
 
 const Navbar = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);

@@ -65,7 +65,7 @@ const LoginForm = ({ isLoginOpen, setIsLoginOpen }) => {
   return (
     <div
       ref={loginRef}
-      className={`absolute top-16 sm:mr-2 sm:right-0 bg-gradient-to-r from-blue-500 to-purple-700 w-80 rounded-lg shadow-lg p-6 transform transition-all duration-300 ease-in-out z-50 
+      className={`absolute top-16 sm:mr-2 sm:right-0 bg-gradient-to-r from-blue-500 to-purple-700 w-[21rem] rounded-lg shadow-lg p-6 transform transition-all duration-300 ease-in-out z-50 
     ${isLoginOpen ? "opacity-100 visible" : "opacity-0 invisible"} 
     ${
       isLoginOpen
@@ -83,7 +83,7 @@ const LoginForm = ({ isLoginOpen, setIsLoginOpen }) => {
         <>
           <div className="h-5 w-full mb-4 flex justify-center items-center">
             {error && (
-              <p className="text-red-500 text-center text-sm truncate w-full whitespace-nowrap">
+              <p className="text-white bg-red-500 text-center text-sm truncate w-full whitespace-nowrap px-4 py-2 rounded-md ">
                 {error}
               </p>
             )}
