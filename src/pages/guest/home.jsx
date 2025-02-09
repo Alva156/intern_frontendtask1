@@ -93,7 +93,7 @@ const Home = () => {
         </video>
 
         {/* Overlay for better text visibility */}
-        <div className="absolute top-0 left-0 w-full h-full bg-black opacity-50"></div>
+        <div className="absolute top-0 left-0 w-full h-full bg-black opacity-70"></div>
 
         {/* Content */}
         <div className="relative z-10 max-w-4xl mx-auto px-6">

@@ -8,6 +8,8 @@ import User from "../layout/user.jsx";
 import UserHome from "../pages/user/userHome.jsx";
 import UserCompanies from "../pages/user/userCompanies.jsx";
 import UserStories from "../pages/user/userStories.jsx";
+import Register from "../pages/authentication/register.jsx";
+import ForgotPassword from "../pages/authentication/forgotPassword.jsx";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -37,6 +39,14 @@ const router = createBrowserRouter([
       {
         path: "/faqs",
         element: <FAQS />,
+      },
+      {
+        path: "/register",
+        element: <Register />,
+      },
+      {
+        path: "/forgot-password",
+        element: <ForgotPassword />,
       },
     ],
   },
