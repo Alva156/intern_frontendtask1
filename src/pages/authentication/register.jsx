@@ -178,7 +178,7 @@ const Register = () => {
           initial={{ opacity: 0, x: -50 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.5 }}
-          className="bg-[#F5F5F5] shadow-2xl rounded-3xl p-8 w-full max-w-2xl xl:w-1/2 flex flex-col gap-4"
+          className="w-full xl:w-[50%] bg-[#F5F5F5] shadow-2xl rounded-3xl p-8 flex flex-col gap-4"
         >
           <h2 className="text-3xl font-bold text-center text-gray-800">
             Create an Account
@@ -233,7 +233,7 @@ const Register = () => {
                     }
                     value={formData[field]}
                     onChange={handleChange}
-                    className="w-full p-3 border rounded-lg focus:ring-2 focus:ring-indigo-400"
+                    className="w-full p-3 border rounded-lg focus:ring-2 focus:ring-indigo-400 placeholder-black text-black"
                   />
                 </>
               ))}
@@ -291,10 +291,10 @@ const Register = () => {
           initial={{ opacity: 0, x: 50 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.5 }}
-          className="w-full max-w-2xl xl:w-1/2 flex flex-col space-y-6 text-white px-4 sm:px-6 md:px-12"
+          className="w-full max-w-2xl xl:w-[48%] min-h-[60vh] xl:min-h-[50vh] flex flex-col justify-between space-y-6 text-white px-4 sm:px-6 md:px-12"
         >
           {/* Security Tips */}
-          <div className="p-6 bg-white rounded-2xl shadow-md text-center">
+          <div className="p-6 bg-white rounded-2xl shadow-md text-center flex-1 flex flex-col justify-center">
             <h3 className="text-xl font-semibold text-blue-900">
               🔒 Security Tip
             </h3>
@@ -316,7 +316,7 @@ const Register = () => {
           </div>
 
           {/* Common Issues */}
-          <div className="p-6 bg-white rounded-2xl shadow-md text-center">
+          <div className="p-6 bg-white rounded-2xl shadow-md text-center flex-1 flex flex-col justify-center">
             <h3 className="text-xl font-semibold text-blue-900">
               ⚠️ Common Issues
             </h3>
@@ -330,7 +330,7 @@ const Register = () => {
           </div>
 
           {/* Contact Support */}
-          <div className="p-6 bg-white rounded-2xl shadow-md text-center">
+          <div className="p-6 bg-white rounded-2xl shadow-md text-center flex-1 flex flex-col justify-center">
             <h3 className="text-xl font-semibold text-blue-900">
               📩 Need More Help?
             </h3>

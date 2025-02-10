@@ -26,19 +26,11 @@ const ForgotPassword = () => {
   const nextTip = () => setTipIndex((prev) => (prev + 1) % securityTips.length);
 
   const handleNext = () => {
-    if (step === 1 && email) setStep(2); // Move to OTP step if email is filled
-    else if (step === 2 && otp)
-      setStep(3); // Move to new password step if OTP is entered
-    else if (
-      step === 3 &&
-      newPassword &&
-      confirmPassword &&
-      newPassword === confirmPassword
-    ) {
-      // Handle password reset logic here
-      alert("Password reset successful!");
-      setStep(1); // Reset to first step after success
-    }
+    if (step < 3) setStep(step + 1);
+  };
+
+  const handleBack = () => {
+    if (step > 1) setStep(step - 1);
   };
 
   return (
@@ -48,8 +40,17 @@ const ForgotPassword = () => {
         initial={{ opacity: 0, x: -50 }}
         animate={{ opacity: 1, x: 0 }}
         transition={{ duration: 0.5 }}
-        className="w-full max-w-2xl 2xl:max-w-3xl 3xl:max-w-4xl p-6 sm:p-8 bg-white rounded-2xl shadow-lg mb-10"
+        className="w-full xl:w-[50%] bg-[#F5F5F5] shadow-2xl rounded-3xl p-8 flex flex-col gap-4"
       >
+        {/* Progress Bar */}
+        <div className="w-full bg-gray-200 rounded-full h-2">
+          <div
+            className={`h-2 bg-indigo-600 rounded-full transition-all`}
+            style={{ width: `${(step / 3) * 100}%` }}
+          />
+        </div>
+
+        {/* Step Titles */}
         <h2 className="text-2xl font-bold text-center text-indigo-700">
           {step === 1
             ? "Forgot Password"
@@ -58,6 +59,23 @@ const ForgotPassword = () => {
             : "Reset Password"}
         </h2>
 
+        {/* Step Indicators */}
+        <div className="flex justify-center space-x-4">
+          {[1, 2, 3].map((s) => (
+            <div
+              key={s}
+              className={`h-10 w-10 flex items-center justify-center rounded-full font-semibold text-sm ${
+                step >= s
+                  ? "bg-indigo-600 text-white"
+                  : "bg-gray-300 text-gray-700"
+              }`}
+            >
+              {s}
+            </div>
+          ))}
+        </div>
+
+        {/* Step 1: Enter Email */}
         {step === 1 && (
           <>
             <label className="block mt-4 font-medium">Enter your Email</label>
@@ -71,6 +89,7 @@ const ForgotPassword = () => {
           </>
         )}
 
+        {/* Step 2: Enter OTP */}
         {step === 2 && (
           <>
             <label className="block mt-4 font-medium">Enter OTP</label>
@@ -84,6 +103,7 @@ const ForgotPassword = () => {
           </>
         )}
 
+        {/* Step 3: Reset Password */}
         {step === 3 && (
           <>
             <label className="block mt-4 font-medium">New Password</label>
@@ -105,12 +125,24 @@ const ForgotPassword = () => {
           </>
         )}
 
-        <button
-          onClick={handleNext}
-          className="w-full p-3 mt-6 text-lg font-semibold text-white bg-indigo-600 rounded-lg hover:bg-indigo-700 transition duration-300"
-        >
-          {step === 3 ? "Reset Password" : "Next"}
-        </button>
+        {/* Navigation Buttons */}
+        <div className="flex justify-between mt-6">
+          {step > 1 && (
+            <button
+              onClick={handleBack}
+              className="px-4 py-2 bg-gray-400 text-white font-semibold rounded-lg shadow-lg hover:bg-gray-500 transition duration-300"
+            >
+              Back
+            </button>
+          )}
+
+          <button
+            onClick={handleNext}
+            className="px-4 py-2 bg-indigo-600 text-white font-semibold rounded-lg shadow-lg hover:bg-indigo-700 transition duration-300"
+          >
+            {step === 3 ? "Reset Password" : "Next"}
+          </button>
+        </div>
       </motion.div>
 
       {/* Help Section */}
@@ -118,7 +150,7 @@ const ForgotPassword = () => {
         initial={{ opacity: 0, x: 50 }}
         animate={{ opacity: 1, x: 0 }}
         transition={{ duration: 0.5 }}
-        className="w-full xl:w-2/5 2xl:w-1/3 3xl:w-1/4 flex flex-col space-y-6 text-white px-4 sm:px-6 md:px-12"
+        className="w-full max-w-2xl xl:w-[48%] min-h-[60vh] xl:min-h-[50vh] flex flex-col justify-between space-y-6 text-white px-4 sm:px-6 md:px-12"
       >
         {/* Security Tips */}
         <div className="p-6 bg-white rounded-2xl shadow-md text-center">
