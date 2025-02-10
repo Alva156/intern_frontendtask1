@@ -90,4 +90,3 @@ const Navbar = () => {
 };
 
 export default Navbar;
-handleNavigation(`/user/${item.toLowerCase()}`);
