@@ -237,7 +237,7 @@ const ForgotPassword = () => {
         className="w-full max-w-2xl xl:w-[48%] min-h-[60vh] xl:min-h-[50vh] flex flex-col justify-between space-y-6 text-white px-4 sm:px-6 md:px-12"
       >
         {/* Security Tips */}
-        <div className="p-6 bg-[#F5F5F5] rounded-2xl shadow-md text-center">
+        <div className="p-6 bg-[#F5F5F5] rounded-2xl shadow-md text-center flex-1 flex flex-col justify-center">
           <h3 className="text-xl font-semibold text-blue-900">
             🔒 Security Tip
           </h3>
@@ -259,7 +259,7 @@ const ForgotPassword = () => {
         </div>
 
         {/* Common Issues */}
-        <div className="p-6 bg-[#F5F5F5] rounded-2xl shadow-md text-center">
+        <div className="p-6 bg-[#F5F5F5] rounded-2xl shadow-md text-center flex-1 flex flex-col justify-center">
           <h3 className="text-xl font-semibold text-blue-900">
             ⚠️ Common Issues
           </h3>
@@ -273,7 +273,7 @@ const ForgotPassword = () => {
         </div>
 
         {/* Contact Support */}
-        <div className="p-6 bg-[#F5F5F5] rounded-2xl shadow-md text-center">
+        <div className="p-6 bg-[#F5F5F5] rounded-2xl shadow-md text-center flex-1 flex flex-col justify-center">
           <h3 className="text-xl font-semibold text-blue-900">
             📩 Need More Help?
           </h3>
