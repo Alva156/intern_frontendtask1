@@ -88,7 +88,7 @@ const Register = () => {
     setState({ loading: true });
     setTimeout(() => {
       setState({ loading: false });
-      navigate("/user/home");
+      navigate("/user/dashboard");
     }, 3000);
   };
 

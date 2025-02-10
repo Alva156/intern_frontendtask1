@@ -39,7 +39,7 @@ const LoginForm = ({ isLoginOpen, setIsLoginOpen }) => {
     setLoading(true);
     setTimeout(() => {
       setLoading(false);
-      navigate("/user/home");
+      navigate("/user/dashboard");
     }, 3000);
   };
 

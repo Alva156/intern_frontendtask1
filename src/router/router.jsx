@@ -3,11 +3,11 @@ import Guest from "../layout/guest.jsx";
 import Home from "../pages/guest/home.jsx";
 import Companies from "../pages/guest/companies.jsx";
 import Stories from "../pages/guest/stories.jsx";
-import FAQS from "../pages/faqs.jsx";
+import FAQS from "../pages/guest/faqs.jsx";
 import User from "../layout/user.jsx";
-import UserHome from "../pages/user/userHome.jsx";
-import UserCompanies from "../pages/user/userCompanies.jsx";
+import UserDashboard from "../pages/user/userDashboard.jsx";
 import UserStories from "../pages/user/userStories.jsx";
+import UserCompanies from "../pages/user/userCompanies.jsx";
 import Register from "../pages/authentication/register.jsx";
 import ForgotPassword from "../pages/authentication/forgotPassword.jsx";
 const router = createBrowserRouter([
@@ -55,8 +55,8 @@ const router = createBrowserRouter([
     element: <User />,
     children: [
       {
-        path: "/user/home",
-        element: <UserHome />,
+        path: "/user/dashboard",
+        element: <UserDashboard />,
       },
       {
         path: "/user/companies",
@@ -65,6 +65,10 @@ const router = createBrowserRouter([
       {
         path: "/user/stories",
         element: <UserStories />,
+      },
+      {
+        path: "/user/faqs",
+        element: <FAQS />,
       },
     ],
   },
