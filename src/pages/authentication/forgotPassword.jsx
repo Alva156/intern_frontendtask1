@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
+import { useNavigate } from "react-router-dom";
 
 const securityTips = [
   "Use a mix of uppercase, lowercase, numbers, and symbols.",
@@ -23,10 +24,58 @@ const ForgotPassword = () => {
   const [otp, setOtp] = useState("");
   const [newPassword, setNewPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+  const [showModal, setShowModal] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
+  const [showPopup, setShowPopup] = useState(false);
+  const navigate = useNavigate();
   const nextTip = () => setTipIndex((prev) => (prev + 1) % securityTips.length);
 
+  const isPasswordValid = (password) =>
+    /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/.test(
+      password
+    );
+
+  const handleResetPassword = () => {
+    if (!newPassword.trim() || !confirmPassword.trim()) {
+      setErrorMessage("All password fields are required.");
+      setShowPopup(true);
+      setTimeout(() => setShowPopup(false), 3000);
+      return;
+    }
+
+    if (newPassword !== confirmPassword) {
+      setErrorMessage("Passwords do not match.");
+      setShowPopup(true);
+      setTimeout(() => setShowPopup(false), 3000);
+      return;
+    }
+
+    if (!isPasswordValid(newPassword)) {
+      setErrorMessage("Password does not meet security requirements.");
+      setShowPopup(true);
+      setTimeout(() => setShowPopup(false), 3000);
+      return;
+    }
+
+    setShowModal(true);
+  };
+
   const handleNext = () => {
-    if (step < 3) setStep(step + 1);
+    if (step === 1 && !email.trim()) {
+      setErrorMessage("Email is required.");
+      setShowPopup(true);
+      setTimeout(() => setShowPopup(false), 3000);
+      return;
+    }
+
+    if (step === 2 && !otp.trim()) {
+      setErrorMessage("OTP is required.");
+      setShowPopup(true);
+      setTimeout(() => setShowPopup(false), 3000);
+      return;
+    }
+
+    setStep(step + 1);
   };
 
   const handleBack = () => {
@@ -35,6 +84,26 @@ const ForgotPassword = () => {
 
   return (
     <div className="flex flex-col xl:flex-row min-h-screen items-center justify-center bg-blue-900 p-6 sm:p-8 gap-8">
+      {showPopup && (
+        <div className="fixed top-4 left-1/2 transform -translate-x-1/2 bg-red-600 text-white px-4 py-2 rounded-md shadow-lg transition-opacity duration-300">
+          {errorMessage}
+        </div>
+      )}
+      {/* Success Modal */}
+      {showModal && (
+        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
+          <div className="bg-white p-6 rounded-lg shadow-lg text-center">
+            <h3 className="text-xl font-semibold text-green-600">Success!</h3>
+            <p className="mt-2">Your password has been changed successfully.</p>
+            <button
+              onClick={() => navigate("/")}
+              className="mt-4 px-4 py-2 bg-indigo-600 text-white rounded-lg"
+            >
+              OK
+            </button>
+          </div>
+        </div>
+      )}
       {/* Form Section */}
       <motion.div
         initial={{ opacity: 0, x: -50 }}
@@ -94,7 +163,7 @@ const ForgotPassword = () => {
           <>
             <label className="block mt-4 font-medium">Enter OTP</label>
             <input
-              type="text"
+              type="number"
               className="w-full p-3 mt-2 border rounded-lg focus:ring-2 focus:ring-indigo-400"
               placeholder="OTP Code"
               value={otp}
@@ -109,21 +178,34 @@ const ForgotPassword = () => {
             <label className="block mt-4 font-medium">New Password</label>
             <input
               type="password"
-              className="w-full p-3 mt-2 border rounded-lg focus:ring-2 focus:ring-indigo-400"
+              className="w-full p-3 mt-2 border rounded-lg"
               placeholder="New Password"
               value={newPassword}
               onChange={(e) => setNewPassword(e.target.value)}
             />
+
             <label className="block mt-4 font-medium">Confirm Password</label>
             <input
               type="password"
-              className="w-full p-3 mt-2 border rounded-lg focus:ring-2 focus:ring-indigo-400"
+              className="w-full p-3 mt-2 border rounded-lg"
               placeholder="Confirm Password"
               value={confirmPassword}
               onChange={(e) => setConfirmPassword(e.target.value)}
             />
           </>
         )}
+        <div className="text-xs text-red-600 w-full flex flex-col items-left">
+          <div className="w-full max-w-sm">
+            <p className="font-semibold mb-2">Password Requirements:</p>
+            <ul className="list-disc pl-5">
+              <li>Must be at least 8 characters long</li>
+              <li>Must include at least one uppercase letter</li>
+              <li>Must have at least one lowercase letter</li>
+              <li>Must have at least one number</li>
+              <li>Must have at least one special character</li>
+            </ul>
+          </div>
+        </div>
 
         {/* Navigation Buttons */}
         <div className="flex justify-between mt-6">
@@ -137,7 +219,7 @@ const ForgotPassword = () => {
           )}
 
           <button
-            onClick={handleNext}
+            onClick={step === 3 ? handleResetPassword : handleNext}
             className="px-4 py-2 bg-indigo-600 text-white font-semibold rounded-lg shadow-lg hover:bg-indigo-700 transition duration-300"
           >
             {step === 3 ? "Reset Password" : "Next"}
@@ -153,7 +235,7 @@ const ForgotPassword = () => {
         className="w-full max-w-2xl xl:w-[48%] min-h-[60vh] xl:min-h-[50vh] flex flex-col justify-between space-y-6 text-white px-4 sm:px-6 md:px-12"
       >
         {/* Security Tips */}
-        <div className="p-6 bg-white rounded-2xl shadow-md text-center">
+        <div className="p-6 bg-[#F5F5F5] rounded-2xl shadow-md text-center">
           <h3 className="text-xl font-semibold text-blue-900">
             🔒 Security Tip
           </h3>
@@ -175,7 +257,7 @@ const ForgotPassword = () => {
         </div>
 
         {/* Common Issues */}
-        <div className="p-6 bg-white rounded-2xl shadow-md text-center">
+        <div className="p-6 bg-[#F5F5F5] rounded-2xl shadow-md text-center">
           <h3 className="text-xl font-semibold text-blue-900">
             ⚠️ Common Issues
           </h3>
@@ -189,7 +271,7 @@ const ForgotPassword = () => {
         </div>
 
         {/* Contact Support */}
-        <div className="p-6 bg-white rounded-2xl shadow-md text-center">
+        <div className="p-6 bg-[#F5F5F5] rounded-2xl shadow-md text-center">
           <h3 className="text-xl font-semibold text-blue-900">
             📩 Need More Help?
           </h3>
