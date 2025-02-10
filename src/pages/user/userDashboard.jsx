@@ -1,12 +1,33 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { FaPlusCircle, FaBookOpen, FaClock } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 
 const UserDashboard = () => {
   const navigate = useNavigate();
+  const [loginMessage, setLoginMessage] = useState("");
+
+  useEffect(() => {
+    const successMessage = localStorage.getItem("loginSuccess");
+    if (successMessage) {
+      setLoginMessage("Login Successful!");
+      localStorage.removeItem("loginSuccess"); // Clear flag immediately
+
+      // Set timeout to remove message after 3 seconds
+      const timer = setTimeout(() => {
+        setLoginMessage("");
+      }, 3000);
+
+      return () => clearTimeout(timer); // Cleanup on unmount
+    }
+  }, []);
 
   return (
     <div className="min-h-screen bg-gray-100">
+      {loginMessage && (
+        <div className="fixed top-4 left-1/2 transform -translate-x-1/2 bg-green-700 text-white px-4 py-2 rounded-md shadow-lg z-50">
+          {loginMessage}
+        </div>
+      )}
       {/* Main Content */}
       <div className="max-w-5xl mx-auto py-10 px-6">
         <h2 className="text-3xl font-semibold text-gray-800">Welcome Back!</h2>

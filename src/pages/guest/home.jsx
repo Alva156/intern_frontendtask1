@@ -68,6 +68,8 @@ const fadeUp = {
 };
 const Home = () => {
   const [isSingleColumn, setIsSingleColumn] = useState(window.innerWidth < 768);
+  const [logoutMessage, setLogoutMessage] = useState("");
+
   useEffect(() => {
     const handleResize = () => {
       setIsSingleColumn(window.innerWidth < 768);
@@ -77,10 +79,29 @@ const Home = () => {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
+  useEffect(() => {
+    const successMessage = localStorage.getItem("logoutSuccess");
+    if (successMessage) {
+      setLogoutMessage("Logout Successful!");
+      localStorage.removeItem("logoutSuccess"); // Clear flag immediately
+
+      // Set timeout to remove message after 3 seconds
+      const timer = setTimeout(() => {
+        setLogoutMessage("");
+      }, 3000);
+
+      return () => clearTimeout(timer); // Cleanup on unmount
+    }
+  }, []);
   return (
     <div className="bg-gray-100">
       {/* Hero Section */}
       <section className="relative h-[22rem] md:h-[34rem]  flex items-center justify-center text-center text-white">
+        {logoutMessage && (
+          <div className="fixed top-4 left-1/2 transform -translate-x-1/2 bg-green-700 text-white px-4 py-2 rounded-md shadow-lg z-50">
+            {logoutMessage}
+          </div>
+        )}
         {/* Video Background */}
         <video
           className="absolute top-0 left-0 w-full h-full object-cover"

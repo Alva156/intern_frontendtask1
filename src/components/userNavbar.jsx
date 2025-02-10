@@ -26,6 +26,7 @@ const UserNavbar = () => {
 
   const handleLogout = () => {
     setModalType("loading");
+    localStorage.setItem("logoutSuccess", "true");
     setTimeout(() => navigate("/"), 3000);
   };
 
@@ -56,7 +57,7 @@ const UserNavbar = () => {
           {menuItems.map((item, index) => (
             <button
               key={index}
-              onClick={() => handleNavigation(`/${item.toLowerCase()}`)}
+              onClick={() => handleNavigation(`/user/${item.toLowerCase()}`)}
               className="text-lg text-[#F5F5F5] font-bold border-b-2 border-transparent hover:border-white transition-all"
             >
               {item}

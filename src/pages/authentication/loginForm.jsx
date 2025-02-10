@@ -40,6 +40,7 @@ const LoginForm = ({ isLoginOpen, setIsLoginOpen }) => {
     setTimeout(() => {
       setLoading(false);
       navigate("/user/dashboard");
+      localStorage.setItem("loginSuccess", "true");
     }, 3000);
   };
 
