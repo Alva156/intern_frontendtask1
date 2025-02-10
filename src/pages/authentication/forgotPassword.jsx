@@ -192,20 +192,22 @@ const ForgotPassword = () => {
               value={confirmPassword}
               onChange={(e) => setConfirmPassword(e.target.value)}
             />
+
+            {/* Password Requirements (Only visible on Step 3) */}
+            <div className="text-xs text-red-600 w-full flex flex-col items-left mt-2">
+              <div className="w-full max-w-sm">
+                <p className="font-semibold mb-2">Password Requirements:</p>
+                <ul className="list-disc pl-5">
+                  <li>Must be at least 8 characters long</li>
+                  <li>Must include at least one uppercase letter</li>
+                  <li>Must have at least one lowercase letter</li>
+                  <li>Must have at least one number</li>
+                  <li>Must have at least one special character</li>
+                </ul>
+              </div>
+            </div>
           </>
         )}
-        <div className="text-xs text-red-600 w-full flex flex-col items-left">
-          <div className="w-full max-w-sm">
-            <p className="font-semibold mb-2">Password Requirements:</p>
-            <ul className="list-disc pl-5">
-              <li>Must be at least 8 characters long</li>
-              <li>Must include at least one uppercase letter</li>
-              <li>Must have at least one lowercase letter</li>
-              <li>Must have at least one number</li>
-              <li>Must have at least one special character</li>
-            </ul>
-          </div>
-        </div>
 
         {/* Navigation Buttons */}
         <div className="flex justify-between mt-6">
