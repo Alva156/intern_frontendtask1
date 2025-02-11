@@ -2,6 +2,7 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 
+//Array of security tips
 const securityTips = [
   "Use a mix of uppercase, lowercase, numbers, and symbols.",
   "Avoid using personal information like birthdays or names.",
@@ -9,7 +10,7 @@ const securityTips = [
   "Change your passwords regularly and don’t reuse old ones.",
   "Use a password manager to store and generate secure passwords.",
 ];
-
+//Array of common issues
 const commonIssues = [
   "Didn't receive the OTP? Check your spam folder.",
   "Make sure you entered the correct registered email.",
@@ -18,6 +19,7 @@ const commonIssues = [
 ];
 
 const ForgotPassword = () => {
+  //Initialization
   const [tipIndex, setTipIndex] = useState(0);
   const [step, setStep] = useState(1);
   const [email, setEmail] = useState("");
@@ -30,11 +32,13 @@ const ForgotPassword = () => {
   const navigate = useNavigate();
   const nextTip = () => setTipIndex((prev) => (prev + 1) % securityTips.length);
 
+  //Password Validations, passsword must be atleast one uppercase letter, lowercase letter, one number, and one special character
   const isPasswordValid = (password) =>
     /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/.test(
       password
     );
 
+  //It is called to reset the password, validates if inputs are field, passwords match
   const handleResetPassword = () => {
     if (!newPassword.trim() || !confirmPassword.trim()) {
       setErrorMessage("All password fields are required.");
@@ -59,7 +63,7 @@ const ForgotPassword = () => {
 
     setShowModal(true);
   };
-
+  // Proceeding to succeeding steps
   const handleNext = () => {
     if (step === 1 && !email.trim()) {
       setErrorMessage("Email is required.");
@@ -91,7 +95,7 @@ const ForgotPassword = () => {
       )}
       {/* Success Modal */}
       {showModal && (
-        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
+        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
           <div className="bg-white p-6 rounded-lg shadow-lg text-center">
             <h3 className="text-xl font-semibold text-green-600">Success!</h3>
             <p className="mt-2">Your password has been changed successfully.</p>

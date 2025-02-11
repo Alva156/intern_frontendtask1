@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { FaPenFancy, FaBookOpen, FaBuilding, FaBullseye } from "react-icons/fa";
+import { FaBuilding } from "react-icons/fa";
 import { Typewriter } from "react-simple-typewriter";
 import { motion } from "framer-motion";
 import video from "../../assets/homepagevid.mp4";
-
+//array of stories
 const stories = [
   {
     id: 1,
@@ -31,7 +31,7 @@ const stories = [
       "Building my first app was an exciting journey, filled with late-night coding...",
   },
 ];
-
+//array of companies
 const companies = [
   {
     id: 1,
@@ -52,7 +52,7 @@ const companies = [
       "Company C is a fintech startup revolutionizing digital banking solutions...",
   },
 ];
-
+//Transition effects of the featured companies and stories
 const slideFromLeft = {
   hidden: { opacity: 0, x: -50 },
   visible: { opacity: 1, x: 0, transition: { duration: 0.6 } },
@@ -67,6 +67,7 @@ const fadeUp = {
   visible: { opacity: 1, y: 0, transition: { duration: 0.6 } },
 };
 const Home = () => {
+  //Initialization
   const [isSingleColumn, setIsSingleColumn] = useState(window.innerWidth < 768);
   const [logoutMessage, setLogoutMessage] = useState("");
 

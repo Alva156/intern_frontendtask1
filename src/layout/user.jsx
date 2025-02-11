@@ -5,6 +5,7 @@ import Header from "../components/header.jsx";
 import Footer from "../components/footer.jsx";
 import "../App.css";
 
+//Overall layout for the User Pages
 const User = () => {
   return (
     <div className="flex flex-col min-h-screen">

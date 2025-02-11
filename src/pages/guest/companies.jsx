@@ -2,7 +2,7 @@ import { useState, useRef, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { FaBuilding, FaTimes } from "react-icons/fa";
 import ReactPaginate from "react-paginate";
-
+//array of data for companies
 const companiesData = [
   {
     id: 1,
@@ -93,15 +93,21 @@ const companiesData = [
     roles: ["IoT Engineer", "Software Developer", "Hardware Engineer"],
   },
 ];
-
+//pagination 6 coompanies per page
 const ITEMS_PER_PAGE = 6;
 
 function Companies() {
+  //initialization
   const { id } = useParams();
   const [selectedCompany, setSelectedCompany] = useState(null);
   const [currentPage, setCurrentPage] = useState(0);
   const [showPopup, setShowPopup] = useState(false);
   const modalRef = useRef(null);
+  const offset = currentPage * ITEMS_PER_PAGE;
+  const currentCompanies = companiesData.slice(offset, offset + ITEMS_PER_PAGE);
+  const pageCount = Math.ceil(companiesData.length / ITEMS_PER_PAGE);
+
+  //if the url has an id, then it will show the company to that respective id
   useEffect(() => {
     if (id) {
       const company = companiesData.find((c) => c.id === parseInt(id));
@@ -110,11 +116,7 @@ function Companies() {
       }
     }
   }, [id]);
-
-  const offset = currentPage * ITEMS_PER_PAGE;
-  const currentCompanies = companiesData.slice(offset, offset + ITEMS_PER_PAGE);
-  const pageCount = Math.ceil(companiesData.length / ITEMS_PER_PAGE);
-
+  //clicking outside the modal
   useEffect(() => {
     function handleClickOutside(event) {
       if (modalRef.current && !modalRef.current.contains(event.target)) {
@@ -126,7 +128,7 @@ function Companies() {
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, []);
-
+  //clicking to show the popup
   const handleApplyClick = () => {
     setShowPopup(true);
     setTimeout(() => setShowPopup(false), 3000);
@@ -136,6 +138,7 @@ function Companies() {
     <div className="max-w-6xl mx-auto p-6 ">
       <h1 className="text-2xl font-bold text-center mb-6">Hiring Companies</h1>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        {/* Where the companies are being presented */}
         {currentCompanies.map((company) => (
           <div
             key={company.id}
@@ -158,7 +161,7 @@ function Companies() {
         pageClassName="px-3 py-1 border rounded-md hover:bg-gray-200"
         activeClassName="bg-[#284A93] text-white"
       />
-
+      {/* interface of the company when clicked */}
       {selectedCompany && (
         <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 ">
           <div
@@ -189,7 +192,7 @@ function Companies() {
           </div>
         </div>
       )}
-
+      {/* validation message of login */}
       {showPopup && (
         <div className="fixed top-4 left-1/2 transform -translate-x-1/2 bg-red-600 text-white px-4 py-2  rounded-md shadow-lg">
           You must log in first to apply.

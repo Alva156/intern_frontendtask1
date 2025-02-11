@@ -5,21 +5,21 @@ import { useNavigate } from "react-router-dom";
 import LoginForm from "../pages/authentication/loginForm";
 
 const Navbar = () => {
+  //Initialization
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isLoginOpen, setIsLoginOpen] = useState(false);
   const menuRef = useRef(null);
   const loginButtonRef = useRef(null);
   const navigate = useNavigate();
+  const toggleState = (setter) => setter((prev) => !prev);
   const menuItems = ["Home", "Companies", "Stories", "FAQs"];
-
+  //It is called to navigate to other pages
   const handleNavigation = (path) => {
     navigate(path);
     setIsMobileMenuOpen(false);
     setIsLoginOpen(false);
   };
-
-  const toggleState = (setter) => setter((prev) => !prev);
-
+  //It is for closing modals for clicking outside of the mobile navbar
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (!menuRef.current?.contains(event.target)) setIsMobileMenuOpen(false);
@@ -64,6 +64,7 @@ const Navbar = () => {
           )}
         </button>
       </div>
+      {/* This is for the mobile navbar */}
       <div
         ref={menuRef}
         className={`absolute left-0 top-16 bg-gradient-to-r from-blue-500 to-purple-700 w-56 rounded-lg shadow-lg p-4 z-50 transition-transform ml-2 ${

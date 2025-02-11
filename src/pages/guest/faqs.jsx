@@ -1,6 +1,6 @@
 import { useState } from "react";
 import ReactPaginate from "react-paginate";
-
+//array of FAQs
 const faqData = [
   {
     id: 1,
@@ -63,12 +63,12 @@ const faqData = [
     answer: "Yes, we encourage alumni to share their experiences.",
   },
 ];
-
+//6 Faqs per page
 const ITEMS_PER_PAGE = 6;
 
 function FAQS() {
+  //Initialization
   const [currentPage, setCurrentPage] = useState(0);
-
   const offset = currentPage * ITEMS_PER_PAGE;
   const currentFAQs = faqData.slice(offset, offset + ITEMS_PER_PAGE);
   const pageCount = Math.ceil(faqData.length / ITEMS_PER_PAGE);
@@ -78,6 +78,7 @@ function FAQS() {
       <h1 className="text-2xl font-bold text-center mb-6">
         Frequently Asked Questions
       </h1>
+      {/* How Faqs being presented ( interface) */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
         {currentFAQs.map((faq) => (
           <div key={faq.id} className="p-6 shadow-md bg-white rounded-lg">
@@ -86,7 +87,7 @@ function FAQS() {
           </div>
         ))}
       </div>
-
+      {/* Pagination */}
       <ReactPaginate
         previousLabel={"←"}
         nextLabel={"→"}

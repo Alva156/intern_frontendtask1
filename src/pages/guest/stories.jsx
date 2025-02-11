@@ -2,7 +2,7 @@ import { useState, useRef, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { FaBookOpen, FaTimes } from "react-icons/fa";
 import ReactPaginate from "react-paginate";
-
+//array of stories
 const storiesData = [
   {
     id: 1,
@@ -101,14 +101,19 @@ const storiesData = [
     date: "December 14, 2024",
   },
 ];
-
+//6 stories per page
 const ITEMS_PER_PAGE = 6;
 
 function Stories() {
+  //Initialization
   const { id } = useParams();
   const [selectedStory, setSelectedStory] = useState(null);
   const [currentPage, setCurrentPage] = useState(0);
   const modalRef = useRef(null);
+  const offset = currentPage * ITEMS_PER_PAGE;
+  const currentStories = storiesData.slice(offset, offset + ITEMS_PER_PAGE);
+  const pageCount = Math.ceil(storiesData.length / ITEMS_PER_PAGE);
+  //If the url has an id, it will open the modal of the correspnding id
   useEffect(() => {
     if (id) {
       const story = storiesData.find((c) => c.id === parseInt(id));
@@ -118,10 +123,7 @@ function Stories() {
     }
   }, [id]);
 
-  const offset = currentPage * ITEMS_PER_PAGE;
-  const currentStories = storiesData.slice(offset, offset + ITEMS_PER_PAGE);
-  const pageCount = Math.ceil(storiesData.length / ITEMS_PER_PAGE);
-
+  //Clicking outside the modal, it will close the modal
   useEffect(() => {
     function handleClickOutside(event) {
       if (modalRef.current && !modalRef.current.contains(event.target)) {
@@ -137,6 +139,7 @@ function Stories() {
   return (
     <div className="max-w-6xl mx-auto p-6">
       <h1 className="text-2xl font-bold text-center mb-6">Inspiring Stories</h1>
+      {/* How stories are being presented */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
         {currentStories.map((story) => (
           <div
@@ -161,7 +164,7 @@ function Stories() {
         pageClassName="px-3 py-1 border rounded-md hover:bg-gray-200"
         activeClassName="bg-[#284A93] text-white"
       />
-
+      {/* open the modal of a story */}
       {selectedStory && (
         <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
           <div

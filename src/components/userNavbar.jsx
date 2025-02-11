@@ -3,14 +3,27 @@ import { FaBars, FaTimes, FaUserCircle } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 
 const UserNavbar = () => {
+  //Initialization
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [modalType, setModalType] = useState(null); // "profile", "logout", or null
+  const [modalType, setModalType] = useState(null);
   const modalRef = useRef(null);
   const menuRef = useRef(null);
   const navigate = useNavigate();
   const menuItems = ["Dashboard", "Companies", "Stories", "FAQs"];
   const userName = "Andrei Alvarico";
 
+  //It is called to navigate to other pages
+  const handleNavigation = (path) => {
+    navigate(path);
+    setIsMobileMenuOpen(false);
+  };
+  //It is called to logout the user and navigate to the root page
+  const handleLogout = () => {
+    setModalType("loading");
+    localStorage.setItem("logoutSuccess", "true");
+    setTimeout(() => navigate("/"), 3000);
+  };
+  //It is for closing modals for clicking outside of the mobile navbar
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (!menuRef.current?.contains(event.target)) setIsMobileMenuOpen(false);
@@ -18,18 +31,7 @@ const UserNavbar = () => {
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
-
-  const handleNavigation = (path) => {
-    navigate(path);
-    setIsMobileMenuOpen(false);
-  };
-
-  const handleLogout = () => {
-    setModalType("loading");
-    localStorage.setItem("logoutSuccess", "true");
-    setTimeout(() => navigate("/"), 3000);
-  };
-
+  //It is for closing modals for clicking outside of the modal
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (modalRef.current && !modalRef.current.contains(event.target)) {
@@ -138,6 +140,7 @@ const UserNavbar = () => {
           </div>
         </div>
       )}
+      {/* Mobile menu */}
       <div
         ref={menuRef}
         className={`absolute left-0 top-16 bg-gradient-to-r from-blue-500 to-purple-700 w-56 rounded-lg shadow-lg p-4 z-50 transition-transform ml-2 ${

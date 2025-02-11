@@ -1,6 +1,7 @@
 import React from "react";
 import Internlogo from "../assets/internlogo.png";
 import { Link } from "react-router-dom";
+//All Imported Icons in this page
 import {
   FaFacebookF,
   FaTwitter,

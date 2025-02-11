@@ -3,14 +3,14 @@ import { useNavigate } from "react-router-dom";
 import { FaGoogle, FaLinkedin } from "react-icons/fa";
 import { AiOutlineUser } from "react-icons/ai";
 import { motion } from "framer-motion";
-
+//Array of security tips
 const securityTips = [
   "Make sure your email is valid to receive important updates.",
   "Avoid using common passwords like '123456' or 'password'.",
   "Review your details before submitting to avoid errors.",
   "Keep your login credentials safe and do not share them.",
 ];
-
+//Array of common issues
 const commonIssues = [
   "Make sure all required fields are filled in correctly.",
   "If your email is already registered, try logging in instead.",
@@ -20,6 +20,7 @@ const commonIssues = [
 ];
 
 const Register = () => {
+  //Initialization
   const navigate = useNavigate();
   const [tipIndex, setTipIndex] = useState(0);
   const nextTip = () => setTipIndex((prev) => (prev + 1) % securityTips.length);
@@ -43,7 +44,7 @@ const Register = () => {
     showFaceScanModal: false,
     scanning: false,
   });
-
+  //Password Validations, passsword must be atleast one uppercase letter, lowercase letter, one number, and one special character
   const isPasswordValid = (password) =>
     /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/.test(
       password
@@ -89,6 +90,7 @@ const Register = () => {
     setTimeout(() => {
       setState({ loading: false });
       navigate("/user/dashboard");
+      localStorage.setItem("loginSuccess", "true");
     }, 3000);
   };
 
@@ -136,7 +138,7 @@ const Register = () => {
         </div>
       )}
       {state.showFaceScanModal && (
-        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
+        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
           <div
             ref={modalRef}
             className="bg-white p-6 rounded-lg shadow-lg text-center"
@@ -218,7 +220,7 @@ const Register = () => {
                   <input
                     key={index}
                     type={
-                      field.includes("password")
+                      field.includes("password") || field === "confirmPassword"
                         ? "password"
                         : field === "birthday"
                         ? "date"

@@ -10,14 +10,13 @@ const LoginForm = ({ isLoginOpen, setIsLoginOpen }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
-
   const loginRef = useRef(null);
   const navigate = useNavigate();
-
+  //static array of credentials
   const validCredentials = [
-    { email: "user@example.com", password: "password123" },
+    { email: "andrei@example.com", password: "Abc123@@fg" },
   ];
-
+  //Login function, checks if inputs are filled, and if matches the static array of credentials
   const handleLogin = () => {
     if (!email || !password) {
       setError("Enter username/email and password");
@@ -33,7 +32,7 @@ const LoginForm = ({ isLoginOpen, setIsLoginOpen }) => {
       }
     }
   };
-
+  //call to execute the loading
   const triggerLoading = (method) => {
     setLoginMethod(method);
     setLoading(true);
@@ -43,7 +42,7 @@ const LoginForm = ({ isLoginOpen, setIsLoginOpen }) => {
       localStorage.setItem("loginSuccess", "true");
     }, 3000);
   };
-
+  //setting the error to blank ""
   useEffect(() => {
     if (error) {
       const timer = setTimeout(() => {
@@ -52,7 +51,7 @@ const LoginForm = ({ isLoginOpen, setIsLoginOpen }) => {
       return () => clearTimeout(timer);
     }
   }, [error]);
-
+  //It is for closing modals for clicking outside of the modal
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (!loginRef.current?.contains(event.target)) {
@@ -64,6 +63,7 @@ const LoginForm = ({ isLoginOpen, setIsLoginOpen }) => {
   }, [setIsLoginOpen]);
 
   return (
+    // to open the login modal
     <div
       ref={loginRef}
       className={`absolute top-16 sm:mr-2 sm:right-0 bg-gradient-to-r from-blue-500 to-purple-700 w-[21rem] rounded-lg shadow-lg p-6 transform transition-all duration-300 ease-in-out z-50 
@@ -75,6 +75,7 @@ const LoginForm = ({ isLoginOpen, setIsLoginOpen }) => {
     }`}
     >
       <h3 className="text-2xl font-bold text-center mb-6">Login</h3>
+      {/* Loading interface */}
       {loading ? (
         <div className="flex flex-col justify-center items-center h-32">
           <div className="loader border-t-4 border-white border-solid rounded-full w-12 h-12 animate-spin"></div>
@@ -89,7 +90,7 @@ const LoginForm = ({ isLoginOpen, setIsLoginOpen }) => {
               </p>
             )}
           </div>
-
+          {/* Login Form */}
           <input
             type="text"
             placeholder="Username or Email"
