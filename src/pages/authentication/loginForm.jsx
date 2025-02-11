@@ -66,7 +66,7 @@ const LoginForm = ({ isLoginOpen, setIsLoginOpen }) => {
     // to open the login modal
     <div
       ref={loginRef}
-      className={`absolute top-16 sm:mr-2 sm:right-0 bg-gradient-to-r from-blue-500 to-purple-700 w-[21rem] rounded-lg shadow-lg p-6 transform transition-all duration-300 ease-in-out z-50 
+      className={`absolute top-16 sm:mr-2 sm:right-0 bg-gradient-to-r from-blue-500 to-purple-700 w-[18rem] rounded-lg shadow-lg p-4 transform transition-all duration-300 ease-in-out z-50 
     ${isLoginOpen ? "opacity-100 visible" : "opacity-0 invisible"} 
     ${
       isLoginOpen
@@ -112,7 +112,7 @@ const LoginForm = ({ isLoginOpen, setIsLoginOpen }) => {
             Log In
           </button>
 
-          <div className="flex items-center my-8">
+          <div className="flex items-center my-3">
             <div className="flex-1 border-t border-gray-300"></div>
             <span className="px-3">OR</span>
             <div className="flex-1 border-t border-gray-300"></div>
@@ -141,7 +141,7 @@ const LoginForm = ({ isLoginOpen, setIsLoginOpen }) => {
               <button
                 key={index}
                 onClick={() => triggerLoading(label)}
-                className="relative bg-white p-3 rounded-full hover:bg-gray-200 mt-2 group"
+                className="relative bg-white p-2 rounded-full hover:bg-gray-200 group"
               >
                 <Icon className={`w-7 h-7 ${color}`} />
                 <span className="absolute left-1/2 -translate-x-1/2 -top-8 bg-gray-800 text-white text-xs px-2 min-w-[80px] py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity">
@@ -150,7 +150,7 @@ const LoginForm = ({ isLoginOpen, setIsLoginOpen }) => {
               </button>
             ))}
           </div>
-          <div className="text-center text-sm mt-6">
+          <div className="text-center text-sm mt-4">
             <button
               onClick={() => {
                 navigate("/forgot-password");
@@ -161,7 +161,7 @@ const LoginForm = ({ isLoginOpen, setIsLoginOpen }) => {
               Forgot your password?
             </button>
           </div>
-          <div className="text-center text-sm mt-4">
+          <div className="text-center text-sm mt-2">
             <p>
               Don't have an account?{" "}
               <button

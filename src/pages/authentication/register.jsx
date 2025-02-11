@@ -141,10 +141,10 @@ const Register = () => {
         <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
           <div
             ref={modalRef}
-            className="bg-white p-6 rounded-lg shadow-lg text-center"
+            className="bg-white p-6 rounded-lg shadow-lg text-center mx-4"
           >
             <p className="text-lg font-semibold">
-              Do you want to use Face Scan?
+            Would you like to use Face Scan for a quicker login experience?
             </p>
             <div className="mt-4 flex justify-center gap-4">
               <button

@@ -66,7 +66,6 @@ const UserNavbar = () => {
             </button>
           ))}
         </div>
-
         {/* Profile Icon */}
         <button
           className="ml-auto lg:mr-4"
