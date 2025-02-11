@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { FaBuilding } from "react-icons/fa";
 import { Typewriter } from "react-simple-typewriter";
 import { motion } from "framer-motion";
-import video from "../../assets/homepagevid.mp4";
+import video from "../../assets/homepagevid2.mp4";
 //array of stories
 const stories = [
   {
